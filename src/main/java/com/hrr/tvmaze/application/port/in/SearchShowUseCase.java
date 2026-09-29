@@ -4,5 +4,5 @@ import com.hrr.tvmaze.domain.model.Show;
 import java.util.List;
 
 public interface SearchShowUseCase {
-    List<Show> search(String seachQuerry);
+    List<Show> search(String query);
 }

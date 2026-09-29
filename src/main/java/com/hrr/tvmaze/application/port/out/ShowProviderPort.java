@@ -5,5 +5,5 @@ import com.hrr.tvmaze.domain.model.Show;
 import java.util.List;
 
 public interface ShowProviderPort {
-    List<Show> search(String searchQuerry);
+    List<Show> search(String query);
 }

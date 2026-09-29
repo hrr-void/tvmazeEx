@@ -16,7 +16,7 @@ public class ShowService implements SearchShowUseCase {
     }
 
     @Override
-    public List<Show> search(String seachQuerry) {
-        return port.search(seachQuerry);
+    public List<Show> search(String query) {
+        return port.search(query);
     }
 }

@@ -21,12 +21,12 @@ public class TvMazeAdapter implements ShowProviderPort {
     }
 
     @Override
-    public List<Show> search(String searchQuerry) {
+    public List<Show> search(String query) {
         TvMazeSearchResult[] results = client
                 .get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/search/shows")
-                        .queryParam("q", searchQuerry)
+                        .queryParam("q", query)
                         .build())
                 .retrieve()
                 .body(TvMazeSearchResult[].class);

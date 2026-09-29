@@ -2,6 +2,7 @@ package com.hrr.tvmaze.adapter.in;
 
 import com.hrr.tvmaze.application.port.in.SearchShowUseCase;
 import com.hrr.tvmaze.domain.model.Show;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,11 @@ public class ShowController {
     }
 
     @GetMapping("/search")
-    public List<Show> search(@RequestParam("search_querry") String searchQuery){
-        return searchShowUseCase.search(searchQuery);
+    public List<Show> search(
+            @RequestParam("query")
+            @NotBlank
+            String query){
+        return searchShowUseCase.search(query);
     }
 
 }
