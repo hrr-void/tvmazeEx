@@ -1,10 +1,10 @@
 package com.hrr.tvmaze.adapter.in;
 
+import com.hrr.tvmaze.application.port.in.GetShowByIdUseCase;
 import com.hrr.tvmaze.application.port.in.SearchShowUseCase;
 import com.hrr.tvmaze.domain.model.Show;
 import com.hrr.tvmaze.domain.model.ShowDetails;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +15,11 @@ import java.util.List;
 public class ShowController {
 
     private final SearchShowUseCase searchShowUseCase;
+    private final GetShowByIdUseCase getShowByIdUseCase;
 
-    public ShowController(SearchShowUseCase searchShowUseCase){
+    public ShowController(SearchShowUseCase searchShowUseCase, GetShowByIdUseCase getShowByIdUseCase){
         this.searchShowUseCase = searchShowUseCase;
+        this.getShowByIdUseCase = getShowByIdUseCase;
     }
 
     @GetMapping("/search")
@@ -33,7 +35,7 @@ public class ShowController {
             @PathVariable("showId")
             @Positive
             Long showId){
-        return searchShowUseCase.getById(showId);
+        return getShowByIdUseCase.getById(showId);
     }
 
 }

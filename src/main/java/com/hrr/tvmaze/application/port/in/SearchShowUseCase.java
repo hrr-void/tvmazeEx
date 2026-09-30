@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface SearchShowUseCase {
     List<Show> search(String query);
-
-    ShowDetails getById(Long showId);
 }
