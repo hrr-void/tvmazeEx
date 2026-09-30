@@ -2,8 +2,10 @@ package com.hrr.tvmaze.adapter.out;
 
 import com.hrr.tvmaze.adapter.out.tvmaze.TvMazeShowMapper;
 import com.hrr.tvmaze.adapter.out.tvmaze.dto.TvMazeSearchResult;
+import com.hrr.tvmaze.adapter.out.tvmaze.dto.TvMazeShowDetails;
 import com.hrr.tvmaze.application.port.out.ShowProviderPort;
 import com.hrr.tvmaze.domain.model.Show;
+import com.hrr.tvmaze.domain.model.ShowDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -37,4 +39,16 @@ public class TvMazeAdapter implements ShowProviderPort {
 
         return Arrays.stream(results).map(TvMazeSearchResult::show).map(mapper::toDomain).toList();
     }
+
+    @Override
+    public ShowDetails getById(Long showId) {
+        TvMazeShowDetails response = client
+                .get()
+                .uri("/shows/{id}", showId)
+                .retrieve()
+                .body(TvMazeShowDetails.class);
+
+        return mapper.toDomain(response);
+    }
+
 }

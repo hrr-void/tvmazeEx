@@ -7,7 +7,7 @@ public record TvMazeShow(
         String name,
         List<String> genres,
         TvMazeNetwork network,
-        TvMazeChannel channel,
+        TvMazeWebChannel webChannel,
         String summary
 ) {
 }

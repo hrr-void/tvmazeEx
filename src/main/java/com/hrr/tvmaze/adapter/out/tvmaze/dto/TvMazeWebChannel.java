@@ -1,9 +1,9 @@
 package com.hrr.tvmaze.adapter.out.tvmaze.dto;
 
-public record TvMazeNetwork(
-        Long id,
+public record TvMazeWebChannel(
+        String id,
         String name,
-        TvMazeCountry country,
+        String country,
         String officialSite
 ) {
 }

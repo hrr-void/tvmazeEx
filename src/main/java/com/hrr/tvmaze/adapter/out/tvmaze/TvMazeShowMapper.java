@@ -1,29 +1,15 @@
 package com.hrr.tvmaze.adapter.out.tvmaze;
 
 import com.hrr.tvmaze.adapter.out.tvmaze.dto.TvMazeShow;
+import com.hrr.tvmaze.adapter.out.tvmaze.dto.TvMazeShowDetails;
 import com.hrr.tvmaze.domain.model.Show;
-import org.springframework.stereotype.Component;
+import com.hrr.tvmaze.domain.model.ShowDetails;
+import org.mapstruct.Mapper;
 
-@Component
-public class TvMazeShowMapper {
+@Mapper(componentModel = "spring")
+public interface TvMazeShowMapper {
 
-    public Show toDomain(TvMazeShow tvMazeShow){
-        return new Show(
-                tvMazeShow.id(),
-                tvMazeShow.name(),
-                resolveChannel(tvMazeShow),
-                tvMazeShow.summary(),
-                tvMazeShow.genres());
-    }
+    Show toDomain(TvMazeShow show);
 
-    private String resolveChannel(TvMazeShow show){
-        if(show.network() != null){
-            return show.network().name();
-        }
-        if(show.channel() != null){
-            return show.channel().name();
-        }
-
-        return null;
-    }
+    ShowDetails toDomain(TvMazeShowDetails showDetails);
 }
