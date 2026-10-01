@@ -14,6 +14,7 @@ import java.util.List;
 
 @Component
 public class TvMazeAdapter implements ShowProviderPort {
+
     private final RestClient client;
     private final TvMazeShowMapper mapper;
 

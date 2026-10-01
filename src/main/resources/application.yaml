@@ -1,3 +1,7 @@
 spring:
   application:
     name: tvmaze
+
+  # CONECCION A MONGO BD
+  mongodb:
+    uri: mongodb+srv://ztr4w04_db_user:drxarPD5eiwiXJ3b@clusterhrr.neatzfh.mongodb.net/tvmaze
