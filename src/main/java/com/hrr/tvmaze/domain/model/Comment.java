@@ -7,11 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record Comment(
         Long showId,
-        @NotBlank
         String comment,
-        @NotNull
-        @Min(0)
-        @Max(5)
         Integer rating
 ) {
 }

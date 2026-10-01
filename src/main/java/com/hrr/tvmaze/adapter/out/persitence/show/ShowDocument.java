@@ -1,4 +1,4 @@
-package com.hrr.tvmaze.adapter.out.persitence;
+package com.hrr.tvmaze.adapter.out.persitence.show;
 
 import com.hrr.tvmaze.domain.model.*;
 import org.springframework.data.annotation.Id;

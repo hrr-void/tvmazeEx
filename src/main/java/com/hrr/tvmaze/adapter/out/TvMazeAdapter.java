@@ -51,5 +51,4 @@ public class TvMazeAdapter implements ShowProviderPort {
 
         return mapper.toDomain(response);
     }
-
 }

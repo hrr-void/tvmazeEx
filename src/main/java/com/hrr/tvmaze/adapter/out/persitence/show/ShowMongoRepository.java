@@ -1,4 +1,4 @@
-package com.hrr.tvmaze.adapter.out.persitence;
+package com.hrr.tvmaze.adapter.out.persitence.show;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

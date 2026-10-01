@@ -1,4 +1,4 @@
-package com.hrr.tvmaze.adapter.out.persitence;
+package com.hrr.tvmaze.adapter.out.persitence.show;
 
 import com.hrr.tvmaze.application.port.out.ShowRepositoryPort;
 import com.hrr.tvmaze.domain.model.ShowDetails;
