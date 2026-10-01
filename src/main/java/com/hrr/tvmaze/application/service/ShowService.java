@@ -18,23 +18,23 @@ import java.util.stream.Collectors;
 @Service
 public class ShowService implements SearchShowUseCase, GetShowByIdUseCase {
 
-    private final ShowProviderPort port;
-    private final ShowRepositoryPort repositoryPort;
+    private final ShowProviderPort showProviderPort;
+    private final ShowRepositoryPort showRepositoryPort;
     private final CommentRepositoryPort commentRepositoryPort;
 
     public ShowService(
-            ShowProviderPort port,
-            ShowRepositoryPort repositoryPort,
+            ShowProviderPort showProviderPort,
+            ShowRepositoryPort showRepositoryPort,
             CommentRepositoryPort commentRepositoryPort
     ){
-        this.port = port;
-        this.repositoryPort = repositoryPort;
+        this.showProviderPort = showProviderPort;
+        this.showRepositoryPort = showRepositoryPort;
         this.commentRepositoryPort = commentRepositoryPort;
     }
 
     @Override
     public List<ShowWithComments> search(String query) {
-        List<Show> shows = port.search(query);
+        List<Show> shows = showProviderPort.search(query);
         List<Long> showIds = shows.stream().map(Show::id).toList();
         Map<Long, List<Comment>> commentsByShowId = commentRepositoryPort.findByShowIds(showIds)
                 .stream()
@@ -50,15 +50,15 @@ public class ShowService implements SearchShowUseCase, GetShowByIdUseCase {
 
     @Override
     public ShowDetails getById(Long showId){
-        Optional<ShowDetails> cachedShow = repositoryPort.findById(showId);
+        Optional<ShowDetails> cachedShow = showRepositoryPort.findById(showId);
 
         if(cachedShow.isPresent()){
             return cachedShow.get();
         }
 
-        ShowDetails showDetails = port.getById(showId);
+        ShowDetails showDetails = showProviderPort.getById(showId);
 
-        repositoryPort.save(showDetails);
+        showRepositoryPort.save(showDetails);
 
         return showDetails;
     }
