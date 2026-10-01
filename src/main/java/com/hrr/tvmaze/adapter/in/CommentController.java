@@ -1,6 +1,6 @@
 package com.hrr.tvmaze.adapter.in;
 
-import com.hrr.tvmaze.adapter.out.persitence.comment.dto.CreateCommentRequest;
+import com.hrr.tvmaze.adapter.in.dto.CreateCommentRequest;
 import com.hrr.tvmaze.application.port.in.CreateCommentUseCase;
 import com.hrr.tvmaze.domain.model.Comment;
 import jakarta.validation.Valid;

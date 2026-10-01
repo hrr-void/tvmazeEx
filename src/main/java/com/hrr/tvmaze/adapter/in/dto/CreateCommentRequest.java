@@ -1,4 +1,4 @@
-package com.hrr.tvmaze.adapter.out.persitence.comment.dto;
+package com.hrr.tvmaze.adapter.in.dto;
 
 import jakarta.validation.constraints.*;
 

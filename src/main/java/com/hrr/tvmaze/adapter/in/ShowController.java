@@ -1,8 +1,8 @@
 package com.hrr.tvmaze.adapter.in;
 
+import com.hrr.tvmaze.adapter.in.dto.SearchShowResponse;
 import com.hrr.tvmaze.application.port.in.GetShowByIdUseCase;
 import com.hrr.tvmaze.application.port.in.SearchShowUseCase;
-import com.hrr.tvmaze.domain.model.Show;
 import com.hrr.tvmaze.domain.model.ShowDetails;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -23,11 +23,14 @@ public class ShowController {
     }
 
     @GetMapping("/search")
-    public List<Show> search(
+    public List<SearchShowResponse> search(
             @RequestParam("query")
             @NotBlank
             String query){
-        return searchShowUseCase.search(query);
+        return searchShowUseCase.search(query)
+                .stream()
+                .map(SearchShowResponse::from)
+                .toList();
     }
 
     @GetMapping("/{showId}")
@@ -37,8 +40,4 @@ public class ShowController {
             Long showId){
         return getShowByIdUseCase.getById(showId);
     }
-
-
-
 }
-
