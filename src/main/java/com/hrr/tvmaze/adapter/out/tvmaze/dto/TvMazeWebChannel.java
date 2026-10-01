@@ -3,7 +3,7 @@ package com.hrr.tvmaze.adapter.out.tvmaze.dto;
 public record TvMazeWebChannel(
         String id,
         String name,
-        String country,
+        TvMazeCountry country,
         String officialSite
 ) {
 }
