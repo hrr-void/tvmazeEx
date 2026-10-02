@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class MongoAdapter implements CommentRepositoryPort {
+public class CommentMongoAdapter implements CommentRepositoryPort {
 
     private CommentMongoRepository repository;
     private CommentMongoMapper mapper;
 
-    public MongoAdapter(CommentMongoRepository repository, CommentMongoMapper mapper){
+    public CommentMongoAdapter(CommentMongoRepository repository, CommentMongoMapper mapper){
         this.repository = repository;
         this.mapper = mapper;
     }

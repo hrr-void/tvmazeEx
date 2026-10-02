@@ -8,6 +8,7 @@ import com.hrr.tvmaze.application.port.out.CommentRepositoryPort;
 import com.hrr.tvmaze.domain.model.Comment;
 import com.hrr.tvmaze.domain.model.Show;
 import com.hrr.tvmaze.domain.model.ShowDetails;
+import com.hrr.tvmaze.domain.model.ShowDetailsWithComments;
 import com.hrr.tvmaze.domain.model.ShowWithComments;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -49,17 +50,18 @@ public class ShowService implements SearchShowUseCase, GetShowByIdUseCase {
     }
 
     @Override
-    public ShowDetails getById(Long showId){
+    public ShowDetailsWithComments getById(Long showId){
         Optional<ShowDetails> cachedShow = showRepositoryPort.findById(showId);
-
+        ShowDetails showDetails;
         if(cachedShow.isPresent()){
-            return cachedShow.get();
+            showDetails = cachedShow.get();
+        } else {
+            showDetails = showProviderPort.getById(showId);
+            showRepositoryPort.save(showDetails);
         }
 
-        ShowDetails showDetails = showProviderPort.getById(showId);
+        List<Comment> comments = commentRepositoryPort.findByShowIds(List.of(showId));
 
-        showRepositoryPort.save(showDetails);
-
-        return showDetails;
+        return new ShowDetailsWithComments(showDetails, comments);
     }
 }

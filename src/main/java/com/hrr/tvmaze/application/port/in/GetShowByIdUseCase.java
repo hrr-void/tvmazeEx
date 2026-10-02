@@ -1,7 +1,7 @@
 package com.hrr.tvmaze.application.port.in;
 
-import com.hrr.tvmaze.domain.model.ShowDetails;
+import com.hrr.tvmaze.domain.model.ShowDetailsWithComments;
 
 public interface GetShowByIdUseCase {
-    ShowDetails getById(Long id);
+    ShowDetailsWithComments getById(Long id);
 }
