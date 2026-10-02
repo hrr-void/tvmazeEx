@@ -1,8 +1,10 @@
 package com.hrr.tvmaze.adapter.out.tvmaze.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record TvMazeExternal(
     Long tvrage,
-    Long theTvDb,
-    String imbd
+    @JsonProperty("thetvdb") Long theTvDb,
+    @JsonProperty("imdb") String imbd
 ){
 }

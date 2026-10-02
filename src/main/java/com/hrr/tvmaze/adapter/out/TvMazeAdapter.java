@@ -38,7 +38,10 @@ public class TvMazeAdapter implements ShowProviderPort {
             return List.of();
         }
 
-        return Arrays.stream(results).map(TvMazeSearchResult::show).map(mapper::toDomain).toList();
+        return Arrays.stream(results)
+                .map(TvMazeSearchResult::show)
+                .map(mapper::toSearchDomain)
+                .toList();
     }
 
     @Override
@@ -49,6 +52,6 @@ public class TvMazeAdapter implements ShowProviderPort {
                 .retrieve()
                 .body(TvMazeShowDetails.class);
 
-        return mapper.toDomain(response);
+        return mapper.toDetailsDomain(response);
     }
 }

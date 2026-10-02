@@ -7,5 +7,5 @@ public interface ShowRepositoryPort {
 
     Optional<ShowDetails> findById(Long id);
 
-    ShowDetails save(ShowDetails show);
+    void save(ShowDetails show);
 }

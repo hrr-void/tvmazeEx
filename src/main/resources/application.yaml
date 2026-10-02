@@ -16,3 +16,7 @@ logging:
         web: DEBUG
         data:
           mongodb: DEBUG
+
+tvmaze:
+  cache:
+    ttl: PT24H

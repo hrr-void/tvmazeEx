@@ -5,11 +5,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.time.Instant;
 
 @Document(collection = "cache")
 public record ShowDocument(
         @Id
         Long id,
+        Instant cachedAt,
 
         String url,
         String name,

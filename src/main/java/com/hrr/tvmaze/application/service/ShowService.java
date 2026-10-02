@@ -2,6 +2,7 @@ package com.hrr.tvmaze.application.service;
 
 import com.hrr.tvmaze.application.port.in.GetShowByIdUseCase;
 import com.hrr.tvmaze.application.port.in.SearchShowUseCase;
+import com.hrr.tvmaze.application.port.in.EnsureShowExistsUseCase;
 import com.hrr.tvmaze.application.port.out.ShowProviderPort;
 import com.hrr.tvmaze.application.port.out.ShowRepositoryPort;
 import com.hrr.tvmaze.application.port.out.CommentRepositoryPort;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ShowService implements SearchShowUseCase, GetShowByIdUseCase {
+public class ShowService implements SearchShowUseCase, GetShowByIdUseCase, EnsureShowExistsUseCase {
 
     private final ShowProviderPort showProviderPort;
     private final ShowRepositoryPort showRepositoryPort;
@@ -51,17 +52,25 @@ public class ShowService implements SearchShowUseCase, GetShowByIdUseCase {
 
     @Override
     public ShowDetailsWithComments getById(Long showId){
-        Optional<ShowDetails> cachedShow = showRepositoryPort.findById(showId);
-        ShowDetails showDetails;
-        if(cachedShow.isPresent()){
-            showDetails = cachedShow.get();
-        } else {
-            showDetails = showProviderPort.getById(showId);
-            showRepositoryPort.save(showDetails);
-        }
-
+        ShowDetails showDetails = findShowDetails(showId);
         List<Comment> comments = commentRepositoryPort.findByShowIds(List.of(showId));
 
         return new ShowDetailsWithComments(showDetails, comments);
+    }
+
+    @Override
+    public void ensureExists(Long showId) {
+        findShowDetails(showId);
+    }
+
+    private ShowDetails findShowDetails(Long showId) {
+        Optional<ShowDetails> cachedShow = showRepositoryPort.findById(showId);
+        if(cachedShow.isPresent()){
+            return cachedShow.get();
+        }
+
+        ShowDetails showDetails = showProviderPort.getById(showId);
+        showRepositoryPort.save(showDetails);
+        return showDetails;
     }
 }

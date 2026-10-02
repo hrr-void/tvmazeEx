@@ -1,5 +1,7 @@
 package com.hrr.tvmaze.adapter.out.tvmaze.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public record TvMazeShowDetails(
@@ -22,9 +24,9 @@ public record TvMazeShowDetails(
         TvMazeNetwork network,
         TvMazeWebChannel webChannel,
         //dvdContri siempre null
-        TvMazeExternal external,
+        @JsonProperty("externals") TvMazeExternal external,
         TvMazeImage image,
         String summary,
         Long updated,
-        TvMazeLinks links
+        @JsonProperty("_links") TvMazeLinks links
 ) {}
